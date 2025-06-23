@@ -79,9 +79,8 @@ h2{
 img{
     border-radius: 10px;
     max-width: 150px;
-    border: rgb(196, 148, 156);
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: 0 0 4px 1px rgb(253, 255, 142);
+    display: flex;
 }
 
 a {
@@ -126,3 +125,60 @@ button{
     box-shadow: 0 0 4px 1px  rgb(196, 148, 156);
 
 }
+
+.flip-card {
+    background-color: transparent;
+    width: 190px;
+    height: 254px;
+    perspective: 1000px;
+    font-family: sans-serif;
+    padding: 10px;
+	}
+
+.title {
+	font-size: 1.5em;
+	font-weight: 900;
+	text-align: center;
+	margin: 0;
+}
+
+.flip-card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+	transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+	box-shadow: 0 8px 14px 0 rgba(255, 72, 0, 0.2);
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border: 2px solid rgb(198, 239, 140);
+	border-radius: 1rem;
+	overflow: hidden;
+}
+
+.flip-card-front {
+	color: rgb(255, 141, 171);
+	align-items: center;
+	background: linear-gradient(to bottom, rgb(198, 239, 140),  rgb(255, 236, 151));
+}
+
+.flip-card-back {
+	transform: rotateY(180deg);
+	background: linear-gradient(to bottom, rgb(255, 178, 181),  rgb(255, 236, 151));
+	color: white;
+}
+

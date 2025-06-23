@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { packs } from './openpack.js';
+import "./App.css"
 
 const rarityOrder = {
     "common": 0,
@@ -9,6 +9,24 @@ const rarityOrder = {
     "ultra": 3,
     "legendary": 4
 }
+
+const Card = ({name, count, rarity}) => {
+  return (
+      <div className="flip-card">
+        <div className="flip-card-inner">
+          <div className="flip-card-front">
+            <p className="title">{name}</p>
+            <img src={`/pics/${name}.png`} alt={name}/>
+          </div>
+          <div className="flip-card-back">
+            <p>Count:{count}</p>
+            <p>Rarity:{rarity}</p>
+          </div>
+        </div>
+      </div>
+  );
+}
+
 
 function getRarity(set, cardName){
     const card = packs[set].find(c => c.name === cardName);
@@ -41,9 +59,7 @@ export default function Collection () {
                 <h3>electric set</h3>
                 <div className="sets">
                   {sortByRarity(1, Object.entries(collection.set1_names)).map(([card,count]) => (
-                  <div className="cards" key={card}><img src={`/pics/${card}.png`} alt={card}/>
-                  {card} x{count} 
-                  </div>
+                  <Card key={card} name={card} count={count} rarity={getRarity(1, card)} />
                   ))}
                 </div>
             </div>
@@ -51,9 +67,7 @@ export default function Collection () {
                 <h3>water set</h3>
                 <div className="sets">
                     {sortByRarity(2, Object.entries(collection.set2_names)).map(([card,count]) => (
-                    <div className="cards" key={card}><img src={`/pics/${card}.png`} alt={card}/>
-                    {card} x{count}
-                    </div>
+                    <Card key={card} name={card} count={count} rarity={getRarity(2, card)} />
                 ))}
                 </div>
             </div>
@@ -61,9 +75,7 @@ export default function Collection () {
                 <h3>trainer set</h3>
                 <div className="sets">
                     {sortByRarity(3, Object.entries(collection.set3_names)).map(([card,count]) => (
-                        <div className="cards" key={card}><img src={`/pics/${card}.png`} alt={card}/>
-                        {card} x{count} 
-                    </div>
+                     <Card key={card} name={card} count={count} rarity={getRarity(3, card)} />
                 ))}
             </div>
         </div>
