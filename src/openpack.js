@@ -1,5 +1,19 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+
+const RevealCard = ({card}) => {
+    const [flipped, setFlipped] = useState(false);
+
+    return (
+        <div className="cards" onClick={() => setFlipped(true)}>
+            {flipped ? (
+                <img src={`/pics/${card.name}.png`} key={`${card.name}`} alt={`${card.name} card`}/>
+            ) : (
+                 <img src={'pics/back.png'} key={`${card.name}`} alt={`${card.name} card`}/>
+            )}
+        </div>
+    )
+}     
 
 export const packs ={
             1: [ //100% electric achievement
@@ -50,7 +64,7 @@ export const packs ={
             ]
 };
 
-export default function OpenPack() {
+export default function OpenPack({collection, updateCollection}) {
     const navigate = useNavigate();
 
     const rarityChances = [
@@ -70,7 +84,6 @@ export default function OpenPack() {
     const [step, setStep] = useState("chooseSet");
     const [set, setSet] = useState(null);
     const [packCards, setPackCards] = useState([]);
-    const [revealCard, setRevealCard] = useState(0);
 
     function handleSetClick(setNumber) {
         setStep("choosePack");
@@ -102,26 +115,15 @@ export default function OpenPack() {
         }
         setPackCards(selected);
        
-        let collection = JSON.parse(sessionStorage.getItem('collection')) ||{
-            set1_names: {},
-            set2_names: {},
-            set3_names: {}
-        };
+        const newCollection = {...collection};
         //add new cards
         const setKey = `set${set}_names`;
         selected.forEach(card => {
-            collection[setKey][card.name] = (collection[setKey][card.name] || 0) + 1;
-        })
-        //put colleciton back to localStorage
-        sessionStorage.setItem('collection', JSON.stringify(collection));
-    }
-
-    function handleReveal() {
-        if (revealCard < 4){ //reveal until all shown
-            setRevealCard(revealCard + 1);
-        } else {
-            setStep("finished");
-        }
+            newCollection[setKey] = {...newCollection[setKey]};
+            newCollection[setKey][card.name] = (newCollection[setKey][card.name] || 0) + 1;
+        });
+        
+        updateCollection(newCollection, 5);
     }
     
     return (
@@ -160,20 +162,11 @@ export default function OpenPack() {
       )}
 	
     {step === "revealCards" && (
-        <div className="cards" onClick={() => handleReveal()}>
-            <img src={`/pics/${packCards[revealCard].name}.png`} alt={`card ${packCards[revealCard].name}`} />
-            {packCards[revealCard].name} Rarity: {packCards[revealCard].rarity}       
-        </div>
-    )}
 
-    {step === "finished" && (
         <div>
        <div className="lineup">
             {packCards.map(card => (
-                <div className="cards">
-                    <img src={`/pics/${card.name}.png`} key={`${card.name}`} alt={`${card.name} card`}/>
-                    {card.name} Rarity: {card.rarity}
-                </div>
+                <RevealCard key={card.name} card={card}/>
             ))}
         </div>
          <button onClick={() => navigate('/')}>Next</button>

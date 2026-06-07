@@ -27,7 +27,6 @@ const Card = ({name, count, rarity}) => {
   );
 }
 
-
 function getRarity(set, cardName){
     const card = packs[set].find(c => c.name === cardName);
     return card ? card.rarity : null;
@@ -44,12 +43,7 @@ function sortByRarity(set, entries){
     })
 }
 
-export default function Collection () {
-    const collection = JSON.parse(sessionStorage.getItem("collection")) || {
-        set1_names: {},
-        set2_names: {},
-        set3_names: {}
-    };
+export default function Collection ({ collection }) {
     
     return (
         <div className="page">
