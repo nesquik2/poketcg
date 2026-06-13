@@ -49,8 +49,10 @@ function App() {
                 <img src="https://www.riffleshuffle.com/cdn/shop/products/as-min_0a9c5129-8b20-45af-9140-1d3416d94c87_960x.png?v=1638564098" alt="packimg"/>
                 </Link>
             </div>
-            <div className="section">
-                <Link to="/collection"> my collection</Link>
+            <div className="navbar">
+              <button> <Link to="/collection"> C</Link> </button>
+              <button> <Link to="/collection"> F</Link> </button>
+              <button> <Link to="/achievement">A</Link></button>
             </div>
           </div> 
           } 
