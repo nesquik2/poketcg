@@ -1,21 +1,53 @@
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
 
-const RevealCard = ({card}) => {
+const RevealCard = ({card, index}) => {
     const [flipped, setFlipped] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setVisible(true), index * 300);
+        return () => clearTimeout(timer);
+    }, [index]);
 
     return (
-        <div className="cards" onClick={() => setFlipped(true)}>
-            {flipped ? (
-                <img src={`/pics/${card.name}.png`} key={`${card.name}`} alt={`${card.name} card`}/>
-            ) : (
-                 <img src={'pics/back.png'} key={`${card.name}`} alt={`${card.name} card`}/>
-            )}
-        </div>
-    )
-} 
+        <motion.div
+            className="cards"
+            onClick={() => visible && !flipped && setFlipped(true)}
+            initial={{ opacity: 0, y: 30 }}
+            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.4 }}
+            style={{ perspective: 1000, cursor: visible && !flipped ? 'pointer' : 'default' }}
+        >
+            <motion.div
+                style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d' }}
+                animate={{ rotateY: flipped ? 180 : 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+            >
+                <motion.div style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    backfaceVisibility: 'hidden',
+                }}>
+                    <img src="/pics/back.png" alt="card back"/>
+                </motion.div>
+
+                <motion.div style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    backfaceVisibility: 'hidden',
+                    rotateY: 180,
+                }}>
+                    <img src={`/pics/${card.name}.png`} alt={card.name}/>
+                </motion.div>
+            </motion.div>
+        </motion.div>
+    );
+}
 
 export const packs ={
         1: [ //100% electric achievement
