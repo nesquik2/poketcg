@@ -1,53 +1,52 @@
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
 
-const RevealCard = ({card, index}) => {
+const RevealCard = ({card, onDismiss}) => {
     const [flipped, setFlipped] = useState(false);
-    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setVisible(true), index * 300);
+        const timer = setTimeout(() => setFlipped(true), 600);
         return () => clearTimeout(timer);
-    }, [index]);
+    }, []);
+
 
     return (
         <motion.div
-            className="cards"
-            onClick={() => visible && !flipped && setFlipped(true)}
-            initial={{ opacity: 0, y: 30 }}
-            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.4 }}
-            style={{ perspective: 1000, cursor: visible && !flipped ? 'pointer' : 'default' }}
+            initial={{ x: '100vw' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100vw' }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            style={{ perspective: 1000, cursor: flipped ? 'pointer' : 'default' }}
+            onClick={() => flipped && onDismiss()}
         >
             <motion.div
-                style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d' }}
-                animate={{ rotateY: flipped ? 180 : 0 }}
-                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                style={{ position: 'relative', width: '150px', height: '210px', transformStyle: 'preserve-3d' }}
+                animate={{ rotateY: flipped ? -180 : 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.6 }}
             >
-                <motion.div style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backfaceVisibility: 'hidden',
+                {/* back */}
+                <div style={{
+                    position: 'absolute', width: '100%', height: '100%',
+                    backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden'
                 }}>
-                    <img src="/pics/back.png" alt="card back"/>
-                </motion.div>
+                    <img src="/pics/back.png" alt="card back" style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
+                </div>
 
-                <motion.div style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backfaceVisibility: 'hidden',
-                    rotateY: 180,
+                {/* front */}
+                <div style={{
+                    position: 'absolute', width: '100%', height: '100%',
+                    backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+                    rotateY: '180deg'
                 }}>
-                    <img src={`/pics/${card.name}.png`} alt={card.name}/>
-                </motion.div>
+                    <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
+                </div>
             </motion.div>
         </motion.div>
     );
 }
+
 
 export const packs ={
         1: [ //100% electric achievement
@@ -163,6 +162,8 @@ export default function OpenPack({collection, updateCollection}) {
         setActiveIndex(prevIndex => [prevIndex[0] + newDirection, newDirection]);
     };
 
+    const [currentCard, setCurrentCard] = useState(0);
+
     function handleSetClick(setNumber) {
         setStep("choosePack");
         setSet(setNumber);
@@ -232,7 +233,6 @@ export default function OpenPack({collection, updateCollection}) {
                         </motion.button>
                     </div>
                 </div>
-
         )}
 
     {step === "choosePack" && (
@@ -257,6 +257,7 @@ export default function OpenPack({collection, updateCollection}) {
                                     newCollection[setKey][card.name] = (newCollection[setKey][card.name] || 0) + 1;
                                 });
                                 updateCollection(newCollection, 5);
+                                setCurrentCard(0);
                             }}
                         />
                     )}
@@ -265,16 +266,29 @@ export default function OpenPack({collection, updateCollection}) {
       )}
 	
     {step === "revealCards" && (
+        currentCard < packCards.length ? (
+            <div>
+                <AnimatePresence mode="wait">
+                <RevealCard
+                    key={currentCard}
+                    card={packCards[currentCard]}
+                    onDismiss={() => setCurrentCard(currentCard + 1)}
+                />
+                </AnimatePresence>
+            </div>
+     ) : (
         <div>
             <div className="lineup">
-            {packCards.map(card => (
-                <RevealCard key={card.name} card={card}/>
-            ))}
+                {packCards.map(card => (
+                    <div className="cards" key={card.name}>
+                        <img src={`/pics/${card.name}.png`} alt={card.name}/>
+                    </div>
+                ))}
             </div>
             <button onClick={() => navigate('/')}>Next</button>
         </div>
-    )}
-    
-    </div>
     )
-}
+    )}
+    </div>
+    )}
+
