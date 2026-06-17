@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
 
+// each individual card reveal animation
 const RevealCard = ({card, onDismiss}) => {
     const [flipped, setFlipped] = useState(false);
 
@@ -26,22 +27,22 @@ const RevealCard = ({card, onDismiss}) => {
                 animate={{ rotateY: flipped ? -180 : 0 }}
                 transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.6 }}
             >
-                {/* back */}
-                <div style={{
+                {/* front */}
+                <motion.div style={{
                     position: 'absolute', width: '100%', height: '100%',
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden'
                 }}>
                     <img src="/pics/back.png" alt="card back" style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
-                </div>
+                </motion.div>
 
-                {/* front */}
-                <div style={{
+                {/* back */}
+                <motion.div style={{
                     position: 'absolute', width: '100%', height: '100%',
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
                     rotateY: '180deg'
                 }}>
-                    <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
-                </div>
+                        <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
+                </motion.div>
             </motion.div>
         </motion.div>
     );
@@ -117,6 +118,7 @@ const packNames = [
     { id: 3, name: "trainer", img: images[3] },
 ];
 
+// for the 'carousel'
 const zIndex = {
   left: 1,
   center: 2,
@@ -192,8 +194,8 @@ export default function OpenPack({collection, updateCollection}) {
                     <div className="carousel">
                         <AnimatePresence mode="popLayout" initial={false}>
                         {visibleItems.map((item) => {
-                            // The layout prop makes the elements change its position as soon as a new one is added
-                            // The key tells framer-motion that the elements changed its position
+                            // the layout prop makes the elements change its position as soon as a new one is added
+                            // the key tells framer-motion that the elements changed its position
                             return (
                             <motion.div className="set" key={item}
                                 layout
@@ -244,7 +246,6 @@ export default function OpenPack({collection, updateCollection}) {
                             images={images} 
                             onOpen={() => {
                                 setStep("revealCards");
-                                // your existing pack opening logic
                                 const selected = [];
                                 for (let i = 0; i < 5; i++){
                                     selected.push(getCardWRarity(set));
