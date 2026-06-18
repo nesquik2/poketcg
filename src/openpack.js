@@ -14,6 +14,7 @@ const RevealCard = ({card, onDismiss}) => {
 
 
     return (
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
         <motion.div
             initial={{ x: '100vw' }}
             animate={{ x: 0 }}
@@ -23,7 +24,7 @@ const RevealCard = ({card, onDismiss}) => {
             onClick={() => flipped && onDismiss()}
         >
             <motion.div
-                style={{ position: 'relative', width: '150px', height: '210px', transformStyle: 'preserve-3d' }}
+                style={{ position: 'relative', width: '250px', height: '350px', transformStyle: 'preserve-3d' }}
                 animate={{ rotateY: flipped ? -180 : 0 }}
                 transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.6 }}
             >
@@ -45,6 +46,7 @@ const RevealCard = ({card, onDismiss}) => {
                 </motion.div>
             </motion.div>
         </motion.div>
+        </div>
     );
 }
 
@@ -268,7 +270,7 @@ export default function OpenPack({collection, updateCollection}) {
 	
     {step === "revealCards" && (
         currentCard < packCards.length ? (
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '420px' }}>
                 <AnimatePresence mode="wait">
                 <RevealCard
                     key={currentCard}
