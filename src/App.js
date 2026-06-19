@@ -45,7 +45,6 @@ function App() {
             <h2>poketcg</h2>
             <div className="section">
                 <Link to="/openpack">
-                open a pack
                 <img src="https://www.riffleshuffle.com/cdn/shop/products/as-min_0a9c5129-8b20-45af-9140-1d3416d94c87_960x.png?v=1638564098" alt="packimg"/>
                 </Link>
             </div>

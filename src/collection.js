@@ -46,7 +46,7 @@ export default function Collection ({ collection }) {
     const navigate = useNavigate();
     
     return (
-        <div className="collection-page">
+        <div className="page">
             <button onClick={() => navigate('/')}>O</button>
             <div className="row">
                 <h3>electric set</h3>

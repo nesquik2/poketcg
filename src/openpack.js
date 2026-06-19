@@ -193,39 +193,45 @@ export default function OpenPack({collection, updateCollection}) {
     <div className="page">
         {step === "chooseSet" && (
 				<div>
-                    <h2>Choose a set</h2>
-                    <div className="carousel">
-                        <AnimatePresence mode="popLayout" initial={false}>
-                        {visibleItems.map((item) => {
-                            // the layout prop makes the elements change its position as soon as a new one is added
-                            // the key tells framer-motion that the elements changed its position
-                            return (
-                            <motion.div className="set" key={item}
-                                layout
-                                custom={{ direction, position: () => {
-                                    if (item === visibleItems[0]) {
-                                    return 'left';
-                                    } else if (item === visibleItems[1]) {
-                                    return 'center';
-                                    } else {
-                                    return 'right';
-                                    }
-                                },
-                                }}  
-                                variants={variants}
-                                initial="enter"
-                                animate="center"
-                                exit="exit"
-                                transition={{ duration: 1 }}
-                                onClick={item === visibleItems[1] ? () => handleSetClick(item.id) : null}      
-                            >    
-                                <img src={item.img} alt={item.name}/>
-                                {item.name}
-                            </motion.div>
-                            );
-                        })}
-                        </AnimatePresence>
-                    </div>
+                   <h2>Choose a set</h2>
+                   <motion.div
+                        initial={{ y: -50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                    >
+                        <div className="carousel">
+                            <AnimatePresence mode="popLayout" initial={false}>
+                            {visibleItems.map((item) => {
+                                // the layout prop makes the elements change its position as soon as a new one is added
+                                // the key tells framer-motion that the elements changed its position
+                                return (
+                                <motion.div className="set" key={item.id}
+                                    layout
+                                    custom={{ direction, position: () => {
+                                        if (item === visibleItems[0]) {
+                                        return 'left';
+                                        } else if (item === visibleItems[1]) {
+                                        return 'center';
+                                        } else {
+                                        return 'right';
+                                        }
+                                    },
+                                    }}  
+                                    variants={variants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 1 }}
+                                    onClick={item === visibleItems[1] ? () => handleSetClick(item.id) : null}      
+                                >    
+                                    <img src={item.img} alt={item.name}/>
+                                    {item.name}
+                                </motion.div>
+                                );
+                            })}
+                            </AnimatePresence>
+                        </div>
+                    </motion.div>
                     <div className="setbuttons">
                         <motion.button
                         whileTap={{ scale: 0.8 }}
