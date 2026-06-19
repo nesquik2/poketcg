@@ -52,7 +52,7 @@ export default function Collection ({ collection }) {
     //close-up view page for a specific card
     if (selectedCard) {
         return (
-            <div className="page">
+            <div className="zoom-in-page">
                 <button onClick={() => setSelectedCard(null)}>Back</button>
                 <TiltedCard
                 imageSrc={`/pics/${selectedCard.name}.png`}

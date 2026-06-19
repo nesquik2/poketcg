@@ -41,7 +41,7 @@ export const ChoosePack = ({ set, images, onOpen }) => {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginTop:'15px'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px',}}>
             <h2>open your pack</h2>
             <p>{messages[clicks]}</p>
             <motion.div

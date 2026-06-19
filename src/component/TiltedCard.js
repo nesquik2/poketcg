@@ -12,7 +12,7 @@ export default function TiltedCard({
   imageSrc,
   altText = 'Tilted card image',
   captionText = '',
-  containerHeight = '300px',
+  containerHeight = '100%',
   containerWidth = '100%',
   imageHeight = '300px',
   imageWidth = '300px',

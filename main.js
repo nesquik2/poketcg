@@ -16,6 +16,11 @@ function createWindow() {
   });
 
   win.loadURL("http://localhost:3000");
+  
+
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.insertCSS('::-webkit-scrollbar { display: none; }');
+  });
 }
 
 app.whenReady().then(createWindow);
@@ -23,3 +28,4 @@ app.whenReady().then(createWindow);
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+

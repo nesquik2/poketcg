@@ -1,18 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./App.css"
 import { packs } from "./openpack";
 
-const achievements = {
-    "50cards": false,  // 1
-    "100cards": false, // 2
-    "250cards": false, // 3
-    "all_legendaries": false, // 4
-    "favorite_card": false, // 5
-    "completeset": false,  // 6
-    "complete1": false,  // 7
-    "complete2": false,  // 8
-    "complete3": false,  // 9
-}
+const achievementData = [
+    {id: "50cards", name: "collector", description:"collect 50 cards! duplicates included"},  // 1
+    {id: "100cards", name: "obsessed", description:"collect 100 cards! duplicates included"}, // 2
+    {id: "250cards", name: "master clicker", description:"collect 250 cards! duplicates included"}, // 3
+    {id: "all_legendaries", name: "mega lucky", description:"collect all legendary cards from all sets"}, // 4
+    {id: "favorite_card", name: "special buddy", description:"collect vanessa's favorite card..."}, // 5
+    {id: "completeset", name: "catch 'em all", description:"collect ALL cards from all sets"},  // 6
+    {id: "complete1", name: "electified", description:"collect all cards from electric set"},  // 7
+    {id: "complete2", name: "drowning in cuteness", description:"collect all cards from water set"},  // 8
+    {id: "complete3", name:"social butterfly", description:"collect all cards from trainer set"},  // 9
+]
 
 //return a list
 export function checkAchievements(collection, numCards, achievements){
@@ -27,9 +27,9 @@ export function checkAchievements(collection, numCards, achievements){
             && collection.set3_names["n"] > 0
         );
     newAchievements["favorite_card"] = collection.set1_names["pachirisu"] > 0;
-    newAchievements["complete1"] = isSetComplete(collection, 1);
-    newAchievements["complete2"] = isSetComplete(collection, 2);
-    newAchievements["complete3"] = isSetComplete(collection, 3);
+    newAchievements["complete1"] = isSetComplete(collection, 1, achievements["complete1"]);
+    newAchievements["complete2"] = isSetComplete(collection, 2, achievements["complete2"]);
+    newAchievements["complete3"] = isSetComplete(collection, 3, achievements["complete3"]);
         
     return newAchievements;
 }
@@ -38,4 +38,29 @@ function isSetComplete(collection, setNumber, current) {
     if (current) return true;
     const setKey = `set${setNumber}_names`;
     return packs[setNumber].every(card => collection[setKey][card.name] > 0);
+}
+
+export default function Achievement ({achievements}) {
+    const navigate = useNavigate();
+
+    return (
+        <div className="badge-page">
+            <button onClick={() => navigate('/')}>O</button>
+            <h3>BADGES</h3>
+            <div className="badge-grid">
+                {achievementData.map((achievement) => (
+                    <div className="badge" key={achievement.id}>
+                        <img 
+                            src={`/pics/${achievement.id}.png`} 
+                            alt={achievement.id} 
+                            style={{ filter: achievements?.[achievement.id] ? 'none' : 'grayscale(100%)' }}
+                        />
+                        <h3>{achievements?.[achievement.id] ? achievement.name : '?????'}</h3>
+                        <p>{achievement.description}</p>
+                    </div>
+                    ))}
+            </div>
+        </div>
+    );
+
 }

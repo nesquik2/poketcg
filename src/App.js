@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Collection from './collection.js';
 import OpenPack from "./openpack.js";
-import { checkAchievements } from './achievement.js';
+import Achievement, {checkAchievements} from './achievement.js';
 
 
 function App() {
   
   const [achievements, setAchievement] = useState(() => 
-    JSON.parse(sessionStorage.getItem("achievements"))
+    JSON.parse(sessionStorage.getItem("achievements")) || {}
   );
 
   const [totalCards, setTotalCards] = useState(() =>
@@ -58,6 +58,7 @@ function App() {
         />
         <Route path="/collection" element={<Collection collection={collection}/>}/>
         <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} totalCards={totalCards}/>} />
+        <Route path="/achievement" element={<Achievement achievements={achievements}/>}/>
       </Routes>
     </Router>
   );
