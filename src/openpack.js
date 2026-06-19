@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
+import CircularGallery from './component/CircularGallery.js'
 
 // each individual card reveal animation
 const RevealCard = ({card, onDismiss}) => {
@@ -24,7 +25,7 @@ const RevealCard = ({card, onDismiss}) => {
             onClick={() => flipped && onDismiss()}
         >
             <motion.div
-                style={{ position: 'relative', width: '250px', height: '350px', transformStyle: 'preserve-3d' }}
+                style={{ position: 'relative', width: '200px', height: '350px', transformStyle: 'preserve-3d' }}
                 animate={{ rotateY: flipped ? -180 : 0 }}
                 transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.6 }}
             >
@@ -33,7 +34,7 @@ const RevealCard = ({card, onDismiss}) => {
                     position: 'absolute', width: '100%', height: '100%',
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden'
                 }}>
-                    <img src="/pics/back.png" alt="card back" style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
+                    <img src="/pics/back.png" alt="card back" style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth:'none'}}/>
                 </motion.div>
 
                 {/* back */}
@@ -42,7 +43,7 @@ const RevealCard = ({card, onDismiss}) => {
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
                     rotateY: '180deg'
                 }}>
-                        <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px' }}/>
+                        <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth: 'none' }}/>
                 </motion.div>
             </motion.div>
         </motion.div>
@@ -270,26 +271,46 @@ export default function OpenPack({collection, updateCollection}) {
 	
     {step === "revealCards" && (
         currentCard < packCards.length ? (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '420px' }}>
-                <AnimatePresence mode="wait">
-                <RevealCard
-                    key={currentCard}
-                    card={packCards[currentCard]}
-                    onDismiss={() => setCurrentCard(currentCard + 1)}
-                />
-                </AnimatePresence>
+            <div style={{overflow:'hidden', height:'430px'}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px'}}>
+                    <AnimatePresence mode="wait">
+                    <RevealCard
+                        key={currentCard}
+                        card={packCards[currentCard]}
+                        onDismiss={() => setCurrentCard(currentCard + 1)}
+                    />
+                    </AnimatePresence>
+                </div>
             </div>
      ) : (
-        <div>
-            <div className="lineup">
-                {packCards.map(card => (
-                    <div className="cards" key={card.name}>
-                        <img src={`/pics/${card.name}.png`} alt={card.name}/>
-                    </div>
-                ))}
+            
+            <div style={{width:'100%', height:'400px'}}>
+                    <CircularGallery
+                    items={packCards.map(card => ({
+                        image: `/pics/${card.name}.png`,
+                        text: card.name
+                    }))}
+                    bend={1}
+                    textColor="#00bfff"
+                    borderRadius={0.05}
+                    scrollEase={0.05}
+                    // Optionally load a custom font for the labels.
+                    // Accepts a stylesheet URL (e.g. Google Fonts) or a direct font file.
+                    // fontUrl=""
+                    scrollSpeed={2}
+                />
+             <button onClick={() => navigate('/')}>Next</button>
             </div>
-            <button onClick={() => navigate('/')}>Next</button>
-        </div>
+        // <div>
+        //     <div className="lineup">
+        //         {packCards.map(card => (
+        //             <div className="cards" key={card.name}>
+        //                 <img src={`/pics/${card.name}.png`} alt={card.name}/>
+        //             </div>
+        //         ))}
+        //     </div>
+        //     <button onClick={() => navigate('/')}>Next</button>
+        // </div>
     )
     )}
     </div>
