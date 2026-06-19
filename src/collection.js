@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { packs } from './openpack.js';
 import "./App.css"
 
@@ -15,12 +15,11 @@ const Card = ({name, count, rarity}) => {
       <div className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <p className="title">{name}</p>
             <img src={`/pics/${name}.png`} alt={name}/>
           </div>
           <div className="flip-card-back">
-            <p>Count:{count}</p>
-            <p>Rarity:{rarity}</p>
+            <p>{count}X</p>
+            <p>{rarity}</p>
           </div>
         </div>
       </div>
@@ -44,11 +43,11 @@ function sortByRarity(set, entries){
 }
 
 export default function Collection ({ collection }) {
+    const navigate = useNavigate();
     
     return (
-        <div className="page">
-            <Link to="/">Back</Link>
-            <h2>My collection</h2>
+        <div className="collection-page">
+            <button onClick={() => navigate('/')}>O</button>
             <div className="row">
                 <h3>electric set</h3>
                 <div className="sets">
