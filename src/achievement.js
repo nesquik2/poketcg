@@ -46,7 +46,7 @@ export default function Achievement ({achievements}) {
     return (
         <div className="badge-page">
             <button onClick={() => navigate('/')}>O</button>
-            <h3>BADGES</h3>
+            <h3>badges</h3>
             <div className="badge-grid">
                 {achievementData.map((achievement) => (
                     <div className="badge" key={achievement.id}>

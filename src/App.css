@@ -161,6 +161,7 @@ a {
 }
 
 
+
 button{
     font-size: 1.2rem;
     background-color: rgb(248, 226, 230);
@@ -186,11 +187,6 @@ button{
 
 .collection-page::-webkit-scrollbar {
     display: none;
-}
-
-.collection-page button {
-    margin-left: 15px;
-    margin-top: 10px;
 }
 
 body {
@@ -350,9 +346,10 @@ body {
     display: none;
 }
 
-.badge-page button {
+.badge-page button, .collection-page button, .zoom-in-page button {
+    font-size: 15px;
     display: block;
-    margin: 10px 0 0 10px;
+    margin: 10px 0px 0px 15px;
 }
 
 .badge-grid {

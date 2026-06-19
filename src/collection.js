@@ -53,7 +53,7 @@ export default function Collection ({ collection }) {
     if (selectedCard) {
         return (
             <div className="zoom-in-page">
-                <button onClick={() => setSelectedCard(null)}>Back</button>
+                <button onClick={() => setSelectedCard(null)}>O</button>
                 <TiltedCard
                 imageSrc={`/pics/${selectedCard.name}.png`}
                 containerHeight="300px"

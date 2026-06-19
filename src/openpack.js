@@ -193,7 +193,7 @@ export default function OpenPack({collection, updateCollection}) {
     <div className="page">
         {step === "chooseSet" && (
 				<div>
-                   <h2>Choose a set</h2>
+                   <h2>choose a set</h2>
                    <motion.div
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -300,23 +300,10 @@ export default function OpenPack({collection, updateCollection}) {
                     textColor="#00bfff"
                     borderRadius={0.05}
                     scrollEase={0.05}
-                    // Optionally load a custom font for the labels.
-                    // Accepts a stylesheet URL (e.g. Google Fonts) or a direct font file.
-                    // fontUrl=""
                     scrollSpeed={2}
                 />
-             <button onClick={() => navigate('/')}>Next</button>
+             <button onClick={() => navigate('/')}>next</button>
             </div>
-        // <div>
-        //     <div className="lineup">
-        //         {packCards.map(card => (
-        //             <div className="cards" key={card.name}>
-        //                 <img src={`/pics/${card.name}.png`} alt={card.name}/>
-        //             </div>
-        //         ))}
-        //     </div>
-        //     <button onClick={() => navigate('/')}>Next</button>
-        // </div>
     )
     )}
     </div>
