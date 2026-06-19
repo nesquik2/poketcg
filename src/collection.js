@@ -1,4 +1,7 @@
 import { useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+import TiltedCard from './component/TiltedCard';
+
 import { packs } from './openpack.js';
 import "./App.css"
 
@@ -10,9 +13,9 @@ const rarityOrder = {
     "legendary": 4
 }
 
-const Card = ({name, count, rarity}) => {
+const Card = ({name, count, rarity,onClick}) => {
   return (
-      <div className="flip-card">
+      <div className="flip-card" onClick={onClick}>
         <div className="flip-card-inner">
           <div className="flip-card-front">
             <img src={`/pics/${name}.png`} alt={name}/>
@@ -44,15 +47,39 @@ function sortByRarity(set, entries){
 
 export default function Collection ({ collection }) {
     const navigate = useNavigate();
+    const [selectedCard, setSelectedCard] = useState(null);
     
+    //close-up view page for a specific card
+    if (selectedCard) {
+        return (
+            <div className="page">
+                <button onClick={() => setSelectedCard(null)}>Back</button>
+                <TiltedCard
+                imageSrc={`/pics/${selectedCard.name}.png`}
+                containerHeight="300px"
+                containerWidth="300px"
+                imageHeight="300px"
+                imageWidth="300px"
+                rotateAmplitude={12}
+                scaleOnHover={1.05}
+                showMobileWarning={false}
+                showTooltip
+                displayOverlayContent
+                overlayContent={`/pics/${selectedCard.rarity}.png`}
+                />
+            </div>
+        )
+    }
+        
     return (
-        <div className="page">
+        <div className="collection-page">
             <button onClick={() => navigate('/')}>O</button>
             <div className="row">
                 <h3>electric set</h3>
                 <div className="sets">
                   {sortByRarity(1, Object.entries(collection.set1_names)).map(([card,count]) => (
-                  <Card key={card} name={card} count={count} rarity={getRarity(1, card)} />
+                  <Card key={card} name={card} count={count} rarity={getRarity(1, card)}
+                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(1,card)})} />
                   ))}
                 </div>
             </div>
@@ -60,7 +87,9 @@ export default function Collection ({ collection }) {
                 <h3>water set</h3>
                 <div className="sets">
                     {sortByRarity(2, Object.entries(collection.set2_names)).map(([card,count]) => (
-                    <Card key={card} name={card} count={count} rarity={getRarity(2, card)} />
+                    <Card key={card} name={card} count={count} rarity={getRarity(2, card)}                     
+                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(1,card)})} />
+
                 ))}
                 </div>
             </div>
@@ -68,7 +97,9 @@ export default function Collection ({ collection }) {
                 <h3>trainer set</h3>
                 <div className="sets">
                     {sortByRarity(3, Object.entries(collection.set3_names)).map(([card,count]) => (
-                     <Card key={card} name={card} count={count} rarity={getRarity(3, card)} />
+                     <Card key={card} name={card} count={count} rarity={getRarity(3, card)} 
+                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(1,card)})} />
+
                 ))}
             </div>
         </div>
