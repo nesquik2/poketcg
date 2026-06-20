@@ -12,10 +12,11 @@ const achievementData = [
     {id: "complete1", name: "electified", description:"collect all cards from electric set"},  // 7
     {id: "complete2", name: "drowning in cuteness", description:"collect all cards from water set"},  // 8
     {id: "complete3", name:"social butterfly", description:"collect all cards from trainer set"},  // 9
+    {id: "firstcustom", name: "gifted artist", description:"make your first custom card design"}, // 10
 ]
 
 //return a list
-export function checkAchievements(collection, numCards, achievements){
+export function checkAchievements(collection, numCards, achievements, customCards){
     const newAchievements = {...achievements};
 
     newAchievements["50cards"] = numCards >= 50;
@@ -30,7 +31,8 @@ export function checkAchievements(collection, numCards, achievements){
     newAchievements["complete1"] = isSetComplete(collection, 1, achievements["complete1"]);
     newAchievements["complete2"] = isSetComplete(collection, 2, achievements["complete2"]);
     newAchievements["complete3"] = isSetComplete(collection, 3, achievements["complete3"]);
-        
+    newAchievements["firstcustom"] = customCards.length > 0;
+
     return newAchievements;
 }
 

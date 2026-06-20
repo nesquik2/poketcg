@@ -38,7 +38,7 @@ function App() {
     setTotalCards(newTotal);
     sessionStorage.setItem('totalCards', JSON.stringify(newTotal));
 
-    const newAchievements = checkAchievements(newCollection, newTotal, achievements);
+    const newAchievements = checkAchievements(newCollection, newTotal, achievements, customCards);
     setAchievement(newAchievements);
     sessionStorage.setItem('achievements', JSON.stringify(newAchievements));
   }
@@ -47,6 +47,10 @@ function App() {
     const updated = [...customCards, newCard];
     setCustomCards(updated);
     sessionStorage.setItem('customCards', JSON.stringify(updated));
+    
+    const newAchievements = checkAchievements(collection, totalCards, achievements, updated);
+    setAchievement(newAchievements);
+    sessionStorage.setItem('achievements', JSON.stringify(newAchievements));
   }
 
   return (
@@ -71,7 +75,7 @@ function App() {
         <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} totalCards={totalCards} customCards={customCards}/>}/>
         <Route path="/collection" element={<Collection collection={collection} customCards={customCards}/>}/>
         <Route path="/custom" element={<CustomCard onSaveCard={onSaveCard}/>} />
-        <Route path="/achievement" element={<Achievement achievements={achievements}/>}/>
+        <Route path="/achievement" element={<Achievement achievements={achievements} customCards={customCards}/>}/>
       </Routes>
     </Router>
   );
