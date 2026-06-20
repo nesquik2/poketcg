@@ -2,8 +2,8 @@ import { useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import TiltedCard from './component/TiltedCard';
 
-import { packs } from './openpack.js';
-import "./App.css"
+import { packs } from './data/packs.js';
+import "./styles/Collection.css"
 
 const rarityOrder = {
     "common": 0,
@@ -13,12 +13,12 @@ const rarityOrder = {
     "legendary": 4
 }
 
-const Card = ({name, count, rarity,onClick}) => {
+const Card = ({name, count, rarity, image, onClick}) => {
   return (
       <div className="flip-card" onClick={onClick}>
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <img src={`/pics/${name}.png`} alt={name}/>
+            <img src={image ? image : `/pics/${name}.png`} alt={name}/>
           </div>
           <div className="flip-card-back">
             <p>{count}X</p>
@@ -45,7 +45,7 @@ function sortByRarity(set, entries){
     })
 }
 
-export default function Collection ({ collection }) {
+export default function Collection ({ collection, customCards }) {
     const navigate = useNavigate();
     const [selectedCard, setSelectedCard] = useState(null);
     
@@ -55,7 +55,7 @@ export default function Collection ({ collection }) {
             <div className="zoom-in-page">
                 <button onClick={() => setSelectedCard(null)}>O</button>
                 <TiltedCard
-                imageSrc={`/pics/${selectedCard.name}.png`}
+                imageSrc={selectedCard.image ? selectedCard.image : `/pics/${selectedCard.name}.png`}
                 containerHeight="300px"
                 containerWidth="300px"
                 imageHeight="300px"
@@ -88,7 +88,7 @@ export default function Collection ({ collection }) {
                 <div className="sets">
                     {sortByRarity(2, Object.entries(collection.set2_names)).map(([card,count]) => (
                     <Card key={card} name={card} count={count} rarity={getRarity(2, card)}                     
-                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(1,card)})} />
+                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(2,card)})} />
 
                 ))}
                 </div>
@@ -98,9 +98,24 @@ export default function Collection ({ collection }) {
                 <div className="sets">
                     {sortByRarity(3, Object.entries(collection.set3_names)).map(([card,count]) => (
                      <Card key={card} name={card} count={count} rarity={getRarity(3, card)} 
-                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(1,card)})} />
+                    onClick={()=> setSelectedCard({ name: card, count, rarity: getRarity(3,card)})} />
 
                 ))}
+            </div>
+            <div className="row">
+                <h3>custom set</h3>
+                <div className="sets">
+                   {Object.entries(collection.set4_names).map(([card, count]) => {
+                        const customCard = customCards.find(c => c.name === card);
+                        return (
+                            <Card key={card} name={card} count={count} 
+                                rarity={customCard?.rarity}
+                                image={customCard?.image}
+                                onClick={() => setSelectedCard({ name: card, count, rarity: customCard?.rarity, image: customCard?.image })}
+                            />
+                        );
+                    })}
+                </div>
             </div>
         </div>
     </div>

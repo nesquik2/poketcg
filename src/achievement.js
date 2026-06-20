@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import "./App.css"
-import { packs } from "./openpack";
+import { packs } from './data/packs.js';
+import "./styles/Achievement.css"
 
 const achievementData = [
     {id: "50cards", name: "collector", description:"collect 50 cards! duplicates included"},  // 1

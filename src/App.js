@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import OpenPack from './openpack.js'
 import Collection from './collection.js';
-import OpenPack from "./openpack.js";
+import CustomCard from "./custom.js";
 import Achievement, {checkAchievements} from './achievement.js';
 
 
@@ -20,10 +21,15 @@ function App() {
     JSON.parse(sessionStorage.getItem("collection")) || {
           set1_names: {},
           set2_names: {},
-          set3_names: {}
+          set3_names: {}, 
+          set4_names: {}
       }
     );
-  
+
+  const [customCards, setCustomCards] = useState(() =>
+    JSON.parse(sessionStorage.getItem('customCards')) || []
+  );
+
   function updateCollection(newCollection, packSize) {
     setCollection(newCollection);
     sessionStorage.setItem('collection', JSON.stringify(newCollection));
@@ -35,6 +41,12 @@ function App() {
     const newAchievements = checkAchievements(newCollection, newTotal, achievements);
     setAchievement(newAchievements);
     sessionStorage.setItem('achievements', JSON.stringify(newAchievements));
+  }
+
+  function onSaveCard(newCard) {
+    const updated = [...customCards, newCard];
+    setCustomCards(updated);
+    sessionStorage.setItem('customCards', JSON.stringify(updated));
   }
 
   return (
@@ -50,14 +62,15 @@ function App() {
             </div>
             <div className="navbar">
               <button> <Link to="/collection"> C</Link> </button>
-              <button> <Link to="/collection"> F</Link> </button>
+              <button> <Link to="/custom"> F</Link> </button>
               <button> <Link to="/achievement">A</Link></button>
             </div>
           </div> 
           } 
         />
-        <Route path="/collection" element={<Collection collection={collection}/>}/>
-        <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} totalCards={totalCards}/>} />
+        <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} totalCards={totalCards} customCards={customCards}/>}/>
+        <Route path="/collection" element={<Collection collection={collection} customCards={customCards}/>}/>
+        <Route path="/custom" element={<CustomCard onSaveCard={onSaveCard}/>} />
         <Route path="/achievement" element={<Achievement achievements={achievements}/>}/>
       </Routes>
     </Router>

@@ -1,0 +1,52 @@
+.custom-card-page {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: Helvetica;
+    text-align: center;
+}
+
+.custom-card-page button {
+    font-size: 15px;
+    display: block;
+    margin: 10px 0px 0px 15px;
+}
+
+.draw-canvas {
+    border-radius: 10px;
+    border: 2px solid gray;
+    cursor: crosshair;
+    display: block;
+    margin: 10px auto;
+}
+
+.brush-controls {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 5px;
+}
+
+/* .brush-controls button {
+
+} */
+
+.palette {
+    display: flex;
+    justify-content: center;
+}
+
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.eraser {
+    background-color: white;
+    border: 1px gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

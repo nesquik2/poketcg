@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
 import CircularGallery from './component/CircularGallery.js'
 
+import { packs, rarityChances, images, packNames } from './data/packs.js';
+import "./styles/OpenPack.css"
+
 // each individual card reveal animation
 const RevealCard = ({card, onDismiss}) => {
     const [flipped, setFlipped] = useState(false);
@@ -43,7 +46,7 @@ const RevealCard = ({card, onDismiss}) => {
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
                     rotateY: '180deg'
                 }}>
-                        <img src={`/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth: 'none' }}/>
+                        <img src={card.image ? card.image : `/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth: 'none' }}/>
                 </motion.div>
             </motion.div>
         </motion.div>
@@ -51,75 +54,6 @@ const RevealCard = ({card, onDismiss}) => {
     );
 }
 
-
-export const packs ={
-        1: [ //100% electric achievement
-            {name:"pikachu", rarity:"common"}, 
-            {name:"pichu", rarity:"common"}, 
-            {name:"raichu", rarity:"uncommon"}, 
-            {name:"togedemaru", rarity:"common"},
-            {name:"lanturn", rarity:"common"},
-            {name:"chinchou", rarity:"common"},
-            {name:"mareep", rarity:"rare"},
-            {name:"flaaffy", rarity:"ultra"},
-            {name:"ampharos", rarity:"ultra"},                
-            {name:"plusle", rarity:"common"}, //twin achievement
-            {name:"minun", rarity:"ultra"}, 
-            {name:"shinx", rarity:"rare"}, 
-            {name:"luxio", rarity:"common"},
-            {name:"luxray", rarity:"ultra"}, // evol achievement
-            {name:"dedenne", rarity:"ultra"},  
-            {name:"pachirisu", rarity:"rare"},  //fav pokemon achievement
-            {name:"emolga", rarity:"rare"},
-            {name:"zekrom", rarity:"legendary"} //achievement
-        ],
-        2: [
-            {name:"squirtle", rarity:"common"}, 
-            {name:"maril", rarity:"rare"},
-            {name:"buizel", rarity:"common"},
-            {name:"piplup", rarity:"common"},
-            {name:"oshawott", rarity:"rare"}, 
-            {name:"spheal", rarity:"uncommon"}, 
-            {name:"vaporeon", rarity:"legendary"}, 
-            {name:"wishiwashi", rarity:"ultra"},
-            {name:"milotic", rarity:"ultra"}
-        ],
-        3: [
-            {name:"elesa", rarity:"rare"}, 
-            {name:"lillie", rarity:"ultra"}, 
-            {name:"erika", rarity:"uncommon"}, 
-            {name:"n", rarity:"legendary"}, //achievement
-            {name:"bianca", rarity:"common"}, 
-            {name:"pokecenter lady", rarity:"common"}, 
-            {name:"hex maniac", rarity:"common"}, 
-            {name:"shauna", rarity:"uncommon"}, 
-            {name:"mallow & lana", rarity:"rare"}, //achievement
-            {name:"acerola", rarity:"rare"}, 
-            {name:"marnie", rarity:"uncommon"}, 
-            {name:"irida", rarity:"uncommon"}, 
-            {name:"iono", rarity:"ultra"}
-        ]
-};
-
-const rarityChances = [
-        {type: "common", chance: 0.45},
-        {type: "uncommon", chance: 0.3},
-        {type: "rare", chance: 0.15},
-        {type: "ultra", chance: 0.08},
-        {type: "legendary", chance: 0.02}
-]
-
-const images = {
-        1: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmkEl7rrrLrXcWdLB8oIqnQyzJIFHfIF5VO-e7672fr-4JcQW0VltWf68_maOieG3s8Jw&usqp=CAU",
-        2: "https://i.pinimg.com/474x/ec/11/bc/ec11bc23bd980c7ca440a8bf06f1ff44.jpg",
-        3: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRunqsLfgHdc5jnA4mwKRknH_TwdPE_Ng2h0A&s"
-};
-
-const packNames = [
-    { id: 1, name: "electric", img: images[1] },
-    { id: 2, name: "water", img: images[2] },
-    { id: 3, name: "trainer", img: images[3] },
-];
 
 // for the 'carousel'
 const zIndex = {
@@ -147,19 +81,29 @@ const variants = {
 
 
 
-export default function OpenPack({collection, updateCollection}) {
+export default function OpenPack({collection, updateCollection, totalCards, customCards}) {
     const navigate = useNavigate();
 
     const [step, setStep] = useState("chooseSet");
     const [set, setSet] = useState(null);
     const [packCards, setPackCards] = useState([]);
 
+   const activePacks = {
+        ...packs, 
+        ...(customCards.length > 0 ? {4: customCards } : {})
+   };
+
+   const allPackNames =[
+        ...packNames,
+        ...(customCards.length > 0 ? [{ id: 4, name: "custom", img: customCards[0].image }] : [])
+   ]
+   
     const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
 
     const indexInArrayScope =
-        ((activeIndex % packNames.length) + packNames.length) % packNames.length;
+        ((activeIndex % allPackNames.length) + allPackNames.length) % allPackNames.length;
 
-    const visibleItems = [...packNames, ...packNames].slice(
+    const visibleItems = [...allPackNames, ...allPackNames].slice(
         indexInArrayScope,
         indexInArrayScope + 3
     );
@@ -182,11 +126,15 @@ export default function OpenPack({collection, updateCollection}) {
             portion += rarityNames.chance;
             if (rand <= portion) {
                 //filter out all the cards in the set that match the rarity
-                const possibleCards = packs[set].filter(card => card.rarity === rarityNames.type);
+                const possibleCards = activePacks[set].filter(card => card.rarity === rarityNames.type);
+                if (possibleCards.length === 0) continue;
                 //pick a random one from the filtered list
                 return possibleCards[Math.floor(Math.random() * possibleCards.length)];
             }
         }
+        
+        const allCards = activePacks[set];
+        return allCards[Math.floor(Math.random() * allCards.length)];
     }
     
     return (
@@ -293,7 +241,7 @@ export default function OpenPack({collection, updateCollection}) {
             <div style={{width:'100%', height:'400px'}}>
                     <CircularGallery
                     items={packCards.map(card => ({
-                        image: `/pics/${card.name}.png`,
+                        image: card.image ? card.image : `/pics/${card.name}.png`,
                         text: card.name
                     }))}
                     bend={1}
