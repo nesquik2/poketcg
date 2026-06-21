@@ -249,7 +249,9 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                     borderRadius={0.05}
                     scrollEase={0.05}
                     scrollSpeed={2}
-                />
+                    font='700 20px Nunito Sans'
+                    fontUrl="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+                    />
              <button onClick={() => navigate('/')}>next</button>
             </div>
     )

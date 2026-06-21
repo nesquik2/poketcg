@@ -99,10 +99,12 @@ export default function CustomCard({ onSaveCard }){
         navigate('/');
     }
 
+    
+
     return (
         <div className="custom-card-page">
             <button onClick={() => navigate('/')}>O</button>
-            <h3>draw your own card!</h3>
+            <h3>draw your own card !</h3>
 
             <input
                 type="text"

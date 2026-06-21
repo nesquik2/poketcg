@@ -15,6 +15,8 @@
   }
 } */
 
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
 :not(input):not(textarea),
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before {
@@ -26,8 +28,18 @@ input, button, textarea, :focus {
     outline: none;
 }
 
+.nunito-sans-simple {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
 .page{
-    font-family: Helvetica;
+    font-family: "Nunito Sans";
     align-items: center;
     text-align: center;
     width: 100%;
@@ -57,7 +69,7 @@ input, button, textarea, :focus {
 }
 
 .navbar a {
-    font-size: 1.5rem;
+    font-size: 10pxrem;
     color: rgb(196, 148, 156);
     text-decoration: none;
 }

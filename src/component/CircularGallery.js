@@ -24,10 +24,10 @@ function autoBind(instance) {
   });
 }
 
-const DEFAULT_FONT = 'bold 30px Figtree';
+const DEFAULT_FONT = 'bold 30px Nunito Sans';
 // Figtree is not guaranteed to be available on the host page, so the component
 // loads it on demand whenever the default font is used.
-const DEFAULT_FONT_URL = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap';
+const DEFAULT_FONT_URL = 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap';
 
 function deriveFontFamilyFromUrl(url) {
   const fileName = (url.split('/').pop() || 'custom-font').split('?')[0];
@@ -105,6 +105,9 @@ async function resolveFont(font, fontUrl) {
     const sizeMatch = font.match(/^\s*(.*?\d+px)/);
     const prefix = sizeMatch ? sizeMatch[1].trim() : 'bold 30px';
     const resolved = `${prefix} "${family}"`;
+
+        console.log('resolved font:', resolved);
+
     if (document.fonts && document.fonts.load) {
       try {
         await document.fonts.load(resolved);
@@ -389,7 +392,7 @@ class App {
       bend,
       textColor = '#ffffff',
       borderRadius = 0,
-      font = 'bold 30px Helvetica',
+      font = 'bold 30px Nunito Sans',
       scrollSpeed = 2,
       scrollEase = 0.05
     } = {}
@@ -593,7 +596,7 @@ export default function CircularGallery({
   bend = 3,
   textColor = '#ffffff',
   borderRadius = 0.05,
-  font = 'bold 30px Figtree',
+  font = 'bold 30px Nunito Sans',
   fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05
