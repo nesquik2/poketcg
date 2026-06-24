@@ -40,8 +40,10 @@ body {
     display:flex;
     align-items: center;
     flex-direction: column;
-    margin: 5px;
+    margin-left: 6px;
+    margin-bottom: 10px;
     width: 100%;
+    
 }
 
 .flip-card {

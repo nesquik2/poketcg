@@ -258,4 +258,4 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
     )}
     </div>
     )}
-
+    

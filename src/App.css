@@ -45,6 +45,11 @@ input, button, textarea, :focus {
     width: 100%;
 }
 
+h1{
+  font-weight: 700;
+  font-size: 35px;
+}
+
 .section {
     max-width: 167px;
     max-height: 262px;

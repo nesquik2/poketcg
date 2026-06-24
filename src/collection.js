@@ -75,7 +75,7 @@ export default function Collection ({ collection, customCards }) {
         <div className="collection-page">
             <button onClick={() => navigate('/')}>O</button>
             <div className="row">
-                <h3>electric set</h3>
+                <h3 style="color: #ea9ab2;">electric set</h3>
                 <div className="sets">
                   {sortByRarity(1, Object.entries(collection.set1_names)).map(([card,count]) => (
                   <Card key={card} name={card} count={count} rarity={getRarity(1, card)}
