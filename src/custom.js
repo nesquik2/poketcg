@@ -113,99 +113,97 @@ export default function CustomCard({ onSaveCard }){
     
 
     return (
-        <div className="custom-card-page">
-            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
-            <h3>draw your own card !</h3>
+       <div className="custom-card-page">
+        <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
+        <h3>draw your own card!</h3>
 
-            <input
-                type="text"
-                placeholder="card name"
-                value={cardName}
-                onChange={(e) => setCardName(e.target.value)}
-                className="card-name-input"
-                maxLength={15}
-            />
+        <div className="drawing-area">
+            {/* left toolbar */}
+            <div className="toolbar">
+                <div className="palette">
+                    {COLORS.map(c => (
+                        <div key={c} className="color-swatch"
+                            style={{
+                                backgroundColor: c,
+                                outline: color === c && !eraser ? '2px solid #3ac7bb' : 'none'
+                            }}
+                            onClick={() => { setColor(c); setEraser(false); }}
+                        />
+                    ))}
+                </div>
 
+                <button onClick={() => setEraser(true)}>
+                    <img src="/pics/eraser.png" alt="eraser"
+                        style={{ boxShadow: 'none', maxHeight: "25px",
+                            opacity: eraser ? 1 : 0.4
+                        }}/>
+                </button>
+
+                <button onClick={clearCanvas}>
+                    <img src="/pics/clear.png" alt="clear"
+                        style={{ boxShadow: 'none', maxHeight: "25px",
+                            opacity: clearing ? 0.3 : 1,
+                            transition: 'opacity 0.3s'
+                        }}/>
+                </button>
+            </div>
+
+            {/* canvas */}
             <canvas
                 ref={canvasRef}
-                width={220}
-                height={300}
+                width={180}
+                height={280}
                 className="draw-canvas"
                 onMouseDown={startDrawing}
                 onMouseMove={draw}
                 onMouseUp={stopDrawing}
                 onMouseLeave={stopDrawing}
             />
+        </div>
 
-            {/* color palette */}
-            <div className="palette">
-                {COLORS.map(c => (
-                    <div 
-                        key={c}
-                        className="color-swatch"
-                        style={{
-                            backgroundColor: c,
-                            outline: color === c && !eraser ? '2px solid #3ac7bb' : 'none'
-                        }}
-                        onClick={() => { setColor(c); setEraser(false); }}
-                        />
-                ))}
-                <div
-                    className="color-swatch eraser"
-                    style={{ opacity: eraser ? 1 : 0.5,}}
-                    onClick={() => setEraser(true)}
-                >
-                    <img src="/pics/eraser.png" alt="eraser" style={{ boxShadow: 'none', maxHeight: "30px",}}/>
-                </div>
-            </div>
+        {/* brush sizes below canvas */}
+        <div className="brush-controls">
+            {brushSizes.map(b => (
+                <button key={b.size} onClick={() => setBrushSize(b.size)}>
+                    <img src={b.img} alt={`brush ${b.size}`}
+                        style={{ boxShadow: 'none', maxHeight: "20px",
+                            opacity: brushSize === b.size && !eraser ? 1 : 0.4
+                        }}/>
+                </button>
+            ))}
+        </div>
 
-            {/* brush size */}
-            <div className="brush-controls">
-                {brushSizes.map(b => (
-                    <button key={b.size} onClick={() => setBrushSize(b.size)}
-                        style={{ background: 'none', border: 'none', boxShadow: 'none' }}>
-                        <img src={b.img} alt={`brush ${b.size}`} 
-                            style={{ 
-                                boxShadow: 'none', 
-                                maxHeight: "20px",
-                                opacity: brushSize === b.size ? 1 : 0.4
-                            }}/>
-                    </button>
-                ))}
-                <button onClick={clearCanvas} style={{ background: 'none', border: 'none', boxShadow: 'none' }}>
-                        <img src="/pics/clear.png" alt="clear" 
-                            style={{ 
-                                boxShadow: 'none', 
-                                maxHeight: "40px",  
-                                opacity: clearing ? 0.3 : 1,
-                                transition: 'opacity 0.3s'
-                            }}/>
-                 </button>
-            </div>
-
-            {/* rarity stars */}
-            <div className="stars">
-                {[1,2,3,4,5].map(i => (
-                    <span
-                        key={i}
-                        onClick={() => setStars(i)}
-                        style={{
-                            cursor: 'pointer',
-                            fontSize: '2.0rem',
-                            color: i <= stars ? '#E27396' : '#ccc'
-                        }}
-                    >
-                        ꕥ
-                    </span>
-                ))}
-                <span style={{ fontSize: '0.8rem', marginLeft: '5px'}}>
-                    {stars > 0 ? starToRarity[stars]: ''}
+        {/* rarity */}
+        <div className="stars">
+            {[1,2,3,4,5].map(i => (
+                <span key={i} onClick={() => setStars(i)}
+                    style={{ cursor: 'pointer', fontSize: '2.0rem',
+                        color: i <= stars ? '#E27396' : '#ccc'
+                    }}>
+                    ꕥ
                 </span>
-            </div>
-            <button onClick={saveCard} style={{margin: "0 auto", top: "25px"}}>
-                 <img src="/pics/save.png" alt="save" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
+            ))}
+            <span style={{ fontSize: '0.8rem', marginLeft: '5px'}}>
+                {stars > 0 ? starToRarity[stars] : ''}
+            </span>
+        </div>
+
+        {/* card name below rarity */}
+        <input
+            type="text"
+            placeholder="card name"
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+            className="card-name-input"
+            maxLength={15}
+        />
+
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button onClick={saveCard}>
+                <img src="/pics/save.png" alt="save" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
             </button>
         </div>
+    </div>
     )
 
 }
