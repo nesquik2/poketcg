@@ -26,7 +26,7 @@
 
 .draw-canvas {
     border-radius: 10px;
-    border: 2px solid gray;
+    border: 2px solid rgb(114, 195, 197);
     cursor: crosshair;
     display: block;
     margin: 10px auto;

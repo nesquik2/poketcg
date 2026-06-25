@@ -46,7 +46,7 @@ export default function Achievement ({achievements}) {
 
     return (
         <div className="badge-page">
-            <button onClick={() => navigate('/')}>O</button>
+            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
             <h3>badges</h3>
             <div className="badge-grid">
                 {achievementData.map((achievement) => (

@@ -58,16 +58,16 @@ function App() {
        <Routes>
         <Route path="/" element={
           <div className="page">
-            <h1>poketcg</h1>
+            <img src="/pics/logo.png"  alt="logo" style={{ boxShadow: 'none', margin: "0 auto", maxHeight: "100px", padding: "5px"}}/>
             <div className="section">
                 <Link to="/openpack">
                 <img src="https://www.riffleshuffle.com/cdn/shop/products/as-min_0a9c5129-8b20-45af-9140-1d3416d94c87_960x.png?v=1638564098" alt="packimg"/>
                 </Link>
             </div>
             <div className="navbar">
-              <button> <Link to="/collection"> C</Link> </button>
-              <button> <Link to="/custom"> F</Link> </button>
-              <button> <Link to="/achievement">A</Link></button>
+              <button> <Link to="/collection"> <img src="/pics/collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
+              <button> <Link to="/custom"><img src="/pics/custom.png" alt="custom" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
+              <button> <Link to="/achievement"><img src="/pics/achievement.png" alt="achievement" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link></button>
             </div>
           </div> 
           } 

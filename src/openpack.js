@@ -148,7 +148,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                         transition={{ duration: 0.6, ease: 'easeOut' }}
                     >
                         <div className="carousel">
-                            <AnimatePresence mode="popLayout" initial={false}>
+                            <AnimatePresence mode="popLayout">
                             {visibleItems.map((item) => {
                                 // the layout prop makes the elements change its position as soon as a new one is added
                                 // the key tells framer-motion that the elements changed its position
@@ -185,10 +185,10 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                         whileTap={{ scale: 0.8 }}
                         onClick={() => handleClick(-1)}
                         >
-                        ◀︎
+                        <img src="/pics/left.png" alt="left" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
                         </motion.button>
                         <motion.button whileTap={{ scale: 0.8 }} onClick={() => handleClick(1)}>
-                        ▶︎
+                        <img src="/pics/right.png" alt="right" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
                         </motion.button>
                     </div>
                 </div>
@@ -252,7 +252,9 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                     font='700 20px Nunito Sans'
                     fontUrl="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
                     />
-             <button onClick={() => navigate('/')}>next</button>
+             <button onClick={() => navigate('/')}>                    
+                <img src="/pics/next.png" alt="next" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
+            </button>
             </div>
     )
     )}

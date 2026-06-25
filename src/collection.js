@@ -53,7 +53,7 @@ export default function Collection ({ collection, customCards }) {
     if (selectedCard) {
         return (
             <div className="zoom-in-page">
-                <button onClick={() => setSelectedCard(null)}>O</button>
+                <button onClick={() => setSelectedCard(null)}><img src="/pics/collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
                 <TiltedCard
                 imageSrc={selectedCard.image ? selectedCard.image : `/pics/${selectedCard.name}.png`}
                 containerHeight="300px"
@@ -65,7 +65,7 @@ export default function Collection ({ collection, customCards }) {
                 showMobileWarning={false}
                 showTooltip
                 displayOverlayContent
-                overlayContent={`/pics/${selectedCard.rarity}.png`}
+                overlayContent={<img src={`/pics/${selectedCard.rarity}.png`} alt={selectedCard.rarity} style={{ boxShadow: 'none', borderRadius: '0', maxHeight: '150px' }}/>}
                 />
             </div>
         )
@@ -73,9 +73,9 @@ export default function Collection ({ collection, customCards }) {
         
     return (
         <div className="collection-page">
-            <button onClick={() => navigate('/')}>O</button>
+            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
             <div className="row">
-                <h3 style="color: #ea9ab2;">electric set</h3>
+                <h3 style={{ color: '#e6de50' }}>electric set</h3>
                 <div className="sets">
                   {sortByRarity(1, Object.entries(collection.set1_names)).map(([card,count]) => (
                   <Card key={card} name={card} count={count} rarity={getRarity(1, card)}
@@ -84,7 +84,7 @@ export default function Collection ({ collection, customCards }) {
                 </div>
             </div>
             <div className="row">
-                <h3>water set</h3>
+                <h3 style={{ color: '#6099df' }}>water set</h3>
                 <div className="sets">
                     {sortByRarity(2, Object.entries(collection.set2_names)).map(([card,count]) => (
                     <Card key={card} name={card} count={count} rarity={getRarity(2, card)}                     
@@ -94,7 +94,7 @@ export default function Collection ({ collection, customCards }) {
                 </div>
             </div>
             <div className="row">
-                <h3>trainer set</h3>
+                <h3 style={{ color: '#ea9ab2' }}>trainer set</h3>
                 <div className="sets">
                     {sortByRarity(3, Object.entries(collection.set3_names)).map(([card,count]) => (
                      <Card key={card} name={card} count={count} rarity={getRarity(3, card)} 
@@ -103,7 +103,7 @@ export default function Collection ({ collection, customCards }) {
                 ))}
             </div>
             <div className="row">
-                <h3>custom set</h3>
+                <h3 style={{ color: '#71b63d' }}>custom set</h3>
                 <div className="sets">
                    {Object.entries(collection.set4_names).map(([card, count]) => {
                         const customCard = customCards.find(c => c.name === card);
