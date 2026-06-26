@@ -8,7 +8,7 @@ export const ChoosePack = ({ set, images, onOpen }) => {
     const [bouncing, setBouncing] = useState(false);
     const [opening, setOpening] = useState(false);
 
-    const messages = ["tap to open", "keep going...", "one more!"];
+    const messages = ["[tap to open]", "keep going...(๑ > ᴗ < ๑)", "one more!₍₍⚞(˶>ᗜ<˶)⚟⁾⁾⁭ ⁭"];
 
     function handleClick() {
         if (opening) return; // ignore clicks during opening animation
@@ -42,7 +42,7 @@ export const ChoosePack = ({ set, images, onOpen }) => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px',}}>
-            <h2>open your pack</h2>
+            <h2 style={{color: "#bf4068", fontSize: "20px"}}>open your pack ◝(ᵔᗜᵔ)◜</h2>
             <p>{messages[clicks]}</p>
             <motion.div
                 onClick={handleClick}

@@ -141,7 +141,12 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
     <div className="page">
         {step === "chooseSet" && (
 				<div>
-                   <h2>choose a set</h2>
+                    <div style={{ textAlign: 'left' }}>
+                        <button onClick={() => navigate('/')}>
+                            <img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px", marginTop: "5px"}}/>
+                        </button>
+                    </div>
+                   <h2 style={{color: "#bf4068", fontSize: "20px", margin: "5px"}}>choose a set ✩‧₊˚</h2>
                    <motion.div
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -150,10 +155,8 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                         <div className="carousel">
                             <AnimatePresence mode="popLayout">
                             {visibleItems.map((item) => {
-                                // the layout prop makes the elements change its position as soon as a new one is added
-                                // the key tells framer-motion that the elements changed its position
                                 return (
-                                <motion.div className="set" key={item.id}
+                                <motion.div key={item.id}
                                     layout
                                     custom={{ direction, position: () => {
                                         if (item === visibleItems[0]) {
