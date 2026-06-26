@@ -25,6 +25,8 @@
 }
 
 .collection-page button, .zoom-in-page button {
+    background: none;
+    box-shadow: none;
     font-size: 15px;
     display: block;
     margin: 10px 0px 0px 15px;

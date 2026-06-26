@@ -53,7 +53,7 @@ export default function Collection ({ collection, customCards }) {
     if (selectedCard) {
         return (
             <div className="zoom-in-page">
-                <button onClick={() => setSelectedCard(null)}><img src="/pics/collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
+                <button onClick={() => setSelectedCard(null)}><img src="/pics/collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
                 <TiltedCard
                 imageSrc={selectedCard.image ? selectedCard.image : `/pics/${selectedCard.name}.png`}
                 containerHeight="300px"
@@ -73,9 +73,9 @@ export default function Collection ({ collection, customCards }) {
         
     return (
         <div className="collection-page">
-            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
+            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
             <div className="row">
-                <h3 style={{ color: '#e6de50' }}>electric set</h3>
+                <h3 style={{ color: '#e6de50' , margin: '5px'}}>electric set</h3>
                 <div className="sets">
                   {sortByRarity(1, Object.entries(collection.set1_names)).map(([card,count]) => (
                   <Card key={card} name={card} count={count} rarity={getRarity(1, card)}

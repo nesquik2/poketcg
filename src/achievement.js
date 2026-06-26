@@ -46,8 +46,8 @@ export default function Achievement ({achievements}) {
 
     return (
         <div className="badge-page">
-            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
-            <h3>badges</h3>
+            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
+            <h3 style={{fontSize: '20px', color:'#bf4068', margin: '5px'}}>badges ☆</h3>
             <div className="badge-grid">
                 {achievementData.map((achievement) => (
                     <div className="badge" key={achievement.id}>
