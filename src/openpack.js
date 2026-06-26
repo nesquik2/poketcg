@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ChoosePack } from './component/choosePack';
 import CircularGallery from './component/CircularGallery.js'
 
-import { packs, rarityChances, images, packNames } from './data/packs.js';
+import { packs, rarityChances, packNames } from './data/packs.js';
 import "./styles/OpenPack.css"
 
 // each individual card reveal animation
@@ -88,15 +88,15 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
     const [set, setSet] = useState(null);
     const [packCards, setPackCards] = useState([]);
 
-   const activePacks = {
+    const activePacks = {
         ...packs, 
         ...(customCards.length > 0 ? {4: customCards } : {})
-   };
+    };
 
-   const allPackNames =[
+    const allPackNames =[
         ...packNames,
-        ...(customCards.length > 0 ? [{ id: 4, name: "custom", img: customCards[0].image }] : [])
-   ]
+        ...(customCards.length > 0 ? [{ id: 4, name: "custom" }] : [])   
+    ]
    
     const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
 
@@ -175,7 +175,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                                     transition={{ duration: 1 }}
                                     onClick={item === visibleItems[1] ? () => handleSetClick(item.id) : null}      
                                 >    
-                                    <img src={item.img} alt={item.name}/>
+                                    <img src={`/pics/${item.name}set.png`} alt={item.name}/>
                                     {item.name}
                                 </motion.div>
                                 );
@@ -203,7 +203,6 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
 					{step === "choosePack" && (
                         <ChoosePack 
                             set={set} 
-                            images={images} 
                             onOpen={() => {
                                 setStep("revealCards");
                                 const selected = [];

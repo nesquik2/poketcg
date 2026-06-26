@@ -2,8 +2,15 @@ import {motion } from 'framer-motion';
 import { confetti } from "@tsparticles/confetti";
 import React, { useState } from 'react';
 
+const setImages = {
+    1: "/pics/electricset.png",
+    2: "/pics/waterset.png",
+    3: "/pics/trainerset.png",
+    4: "/pics/customset.png"
+};
 
-export const ChoosePack = ({ set, images, onOpen }) => {
+
+export const ChoosePack = ({ set, onOpen }) => {
     const [clicks, setClicks] = useState(0);
     const [bouncing, setBouncing] = useState(false);
     const [opening, setOpening] = useState(false);
@@ -59,7 +66,7 @@ export const ChoosePack = ({ set, images, onOpen }) => {
                 whileTap={!opening ? { scale: 0.9 } : {}}
                 style={{ cursor: 'pointer' }}
             >
-                <img src={images[set]} alt="pack" />
+                <img src={setImages[set]} alt="pack" />
             </motion.div>
         </div>
     );

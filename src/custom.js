@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import './styles/CustomCard.css'
 
-const COLORS = ['#E27396', '#EA9AB2', '#EFCFE3', '#EAF2D7', '#B3DEE2'];
+const COLORS = ['#E27396', '#ea9a9a', '#EFCFE3', '#EAF2D7', '#B3DEE2', '#BB8FDB'];
 
 const starToRarity = {
     1: "common", 
