@@ -114,8 +114,17 @@ export default function CustomCard({ onSaveCard }){
 
     return (
        <div className="custom-card-page">
-        <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "30px"}}/></button>
-        <h3>draw your own card!</h3>
+        <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
+        <h3 style={{color:'#bf4068', margin: '10px'}}>draw your own card ⋆˚࿔</h3>
+
+        <input
+            type="text"
+            placeholder=" ⊹ card name ⊹ "
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+            className="card-name-input"
+            maxLength={15}
+        />
 
         <div className="drawing-area">
             {/* left toolbar */}
@@ -134,14 +143,14 @@ export default function CustomCard({ onSaveCard }){
 
                 <button onClick={() => setEraser(true)}>
                     <img src="/pics/eraser.png" alt="eraser"
-                        style={{ boxShadow: 'none', maxHeight: "25px",
+                        style={{ boxShadow: 'none', maxHeight: "35px",
                             opacity: eraser ? 1 : 0.4
                         }}/>
                 </button>
 
                 <button onClick={clearCanvas}>
                     <img src="/pics/clear.png" alt="clear"
-                        style={{ boxShadow: 'none', maxHeight: "25px",
+                        style={{ boxShadow: 'none', maxHeight: "40px",
                             opacity: clearing ? 0.3 : 1,
                             transition: 'opacity 0.3s'
                         }}/>
@@ -161,7 +170,6 @@ export default function CustomCard({ onSaveCard }){
             />
         </div>
 
-        {/* brush sizes below canvas */}
         <div className="brush-controls">
             {brushSizes.map(b => (
                 <button key={b.size} onClick={() => setBrushSize(b.size)}>
@@ -183,20 +191,7 @@ export default function CustomCard({ onSaveCard }){
                     ꕥ
                 </span>
             ))}
-            <span style={{ fontSize: '0.8rem', marginLeft: '5px'}}>
-                {stars > 0 ? starToRarity[stars] : ''}
-            </span>
         </div>
-
-        {/* card name below rarity */}
-        <input
-            type="text"
-            placeholder="card name"
-            value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
-            className="card-name-input"
-            maxLength={15}
-        />
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button onClick={saveCard}>
