@@ -2,21 +2,21 @@ export const packs ={
         1: [ //100% electric achievement
             {name:"pikachu", rarity:"common"}, 
             {name:"pichu", rarity:"common"}, 
-            {name:"raichu", rarity:"uncommon"}, 
             {name:"togedemaru", rarity:"common"},
             {name:"lanturn", rarity:"common"},
             {name:"chinchou", rarity:"common"},
+            {name:"plusle", rarity:"common"}, //twin achievement
+            {name:"luxio", rarity:"common"},
+            {name:"raichu", rarity:"uncommon"}, 
             {name:"mareep", rarity:"rare"},
+            {name:"shinx", rarity:"rare"}, 
+            {name:"pachirisu", rarity:"rare"},  //fav pokemon achievement
+            {name:"emolga", rarity:"rare"},           
             {name:"flaaffy", rarity:"ultra"},
             {name:"ampharos", rarity:"ultra"},                
-            {name:"plusle", rarity:"common"}, //twin achievement
             {name:"minun", rarity:"ultra"}, 
-            {name:"shinx", rarity:"rare"}, 
-            {name:"luxio", rarity:"common"},
             {name:"luxray", rarity:"ultra"}, // evol achievement
             {name:"dedenne", rarity:"ultra"},  
-            {name:"pachirisu", rarity:"rare"},  //fav pokemon achievement
-            {name:"emolga", rarity:"rare"},
             {name:"zekrom", rarity:"legendary"} //achievement
         ],
         2: [

@@ -3,9 +3,9 @@ import { packs } from './data/packs.js';
 import "./styles/Achievement.css"
 
 const achievementData = [
-    {id: "50cards", name: "collector", description:"collect 50 cards! duplicates included"},  // 1
-    {id: "100cards", name: "obsessed", description:"collect 100 cards! duplicates included"}, // 2
-    {id: "250cards", name: "master clicker", description:"collect 250 cards! duplicates included"}, // 3
+    {id: "10cards", name: "collector", description:"collect 10 cards! duplicates included"},  // 1
+    {id: "50cards", name: "obsessed", description:"collect 50 cards! duplicates included"}, // 2
+    {id: "100cards", name: "master clicker", description:"collect 100 cards! duplicates included"}, // 3
     {id: "all_legendaries", name: "mega lucky", description:"collect all legendary cards from all sets"}, // 4
     {id: "favorite_card", name: "special buddy", description:"collect vanessa's favorite card..."}, // 5
     {id: "completeset", name: "catch 'em all", description:"collect ALL cards from all sets"},  // 6
@@ -19,9 +19,9 @@ const achievementData = [
 export function checkAchievements(collection, numCards, achievements, customCards){
     const newAchievements = {...achievements};
 
+    newAchievements["10cards"] = numCards >= 10;
     newAchievements["50cards"] = numCards >= 50;
     newAchievements["100cards"] = numCards >= 100;
-    newAchievements["250cards"] = numCards >= 250;
     newAchievements[ "all_legendaries"] = (
             collection.set1_names["zekrom"] > 0
             && collection.set2_names["vaporeon"] > 0
@@ -31,6 +31,7 @@ export function checkAchievements(collection, numCards, achievements, customCard
     newAchievements["complete1"] = isSetComplete(collection, 1, achievements["complete1"]);
     newAchievements["complete2"] = isSetComplete(collection, 2, achievements["complete2"]);
     newAchievements["complete3"] = isSetComplete(collection, 3, achievements["complete3"]);
+    newAchievements["completeset"] = newAchievements["complete1"] && newAchievements["complete2"] && newAchievements["complete3"];
     newAchievements["firstcustom"] = customCards.length > 0;
     return newAchievements;
 }

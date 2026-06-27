@@ -228,6 +228,14 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
     {step === "revealCards" && (
         currentCard < packCards.length ? (
             <div style={{overflow:'hidden', height:'430px'}}>
+                <div style={{ position: 'relative' }}>
+                    <button 
+                        onClick={() => setCurrentCard(packCards.length)}
+                        style={{ position: 'absolute', top: '15px', right: '10px' }}
+                    >
+                        <img src="/pics/skip.png" alt="skip" style={{ boxShadow: 'none', maxHeight: '30px' }}/>
+                    </button>
+                </div>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px'}}>
                     <AnimatePresence mode="wait">
                     <RevealCard
