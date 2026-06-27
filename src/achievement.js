@@ -31,7 +31,7 @@ export function checkAchievements(collection, numCards, achievements, customCard
     newAchievements["complete1"] = isSetComplete(collection, 1, achievements["complete1"]);
     newAchievements["complete2"] = isSetComplete(collection, 2, achievements["complete2"]);
     newAchievements["complete3"] = isSetComplete(collection, 3, achievements["complete3"]);
-    newAchievements["first_custom"] = customCards.length > 0;
+    newAchievements["firstcustom"] = customCards.length > 0;
     return newAchievements;
 }
 
