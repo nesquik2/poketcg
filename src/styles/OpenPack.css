@@ -19,7 +19,15 @@
 img{
     border-radius: 10px;
     max-width: 170px;
-    display: flex;
+    display: block;
+}
+
+.reveal-card-inner img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    display: block;
+    object-fit: cover;
 }
 
 

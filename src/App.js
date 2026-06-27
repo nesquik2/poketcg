@@ -61,7 +61,7 @@ function App() {
             <img src="/pics/logo.png"  alt="logo" style={{ boxShadow: 'none', margin: "0 auto", maxHeight: "100px", padding: "5px"}}/>
             <div className="section">
                 <Link to="/openpack">
-                <img src="https://www.riffleshuffle.com/cdn/shop/products/as-min_0a9c5129-8b20-45af-9140-1d3416d94c87_960x.png?v=1638564098" alt="packimg"/>
+                <img src="/pics/back.png" alt="packimg"/>
                 </Link>
             </div>
             <div className="navbar">

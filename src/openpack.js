@@ -28,7 +28,7 @@ const RevealCard = ({card, onDismiss}) => {
             onClick={() => flipped && onDismiss()}
         >
             <motion.div
-                style={{ position: 'relative', width: '200px', height: '350px', transformStyle: 'preserve-3d' }}
+                style={{ position: 'relative', width: '204px', height: '280px', transformStyle: 'preserve-3d' }}  className="reveal-card-inner"
                 animate={{ rotateY: flipped ? -180 : 0 }}
                 transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.6 }}
             >
@@ -37,7 +37,7 @@ const RevealCard = ({card, onDismiss}) => {
                     position: 'absolute', width: '100%', height: '100%',
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden'
                 }}>
-                    <img src="/pics/back.png" alt="card back" style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth:'none'}}/>
+                    <img src="/pics/back.png" alt="card back" style={{ maxWidth: '230px', borderRadius: '10px'}}/>
                 </motion.div>
 
                 {/* back */}
