@@ -37,7 +37,7 @@ const RevealCard = ({card, onDismiss}) => {
                     position: 'absolute', width: '100%', height: '100%',
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden'
                 }}>
-                    <img src="/pics/back.png" alt="card back" style={{ maxWidth: '230px', borderRadius: '10px'}}/>
+                    <img src="pics://back.png" alt="card back" style={{ maxWidth: '230px', borderRadius: '10px'}}/>
                 </motion.div>
 
                 {/* back */}
@@ -46,7 +46,7 @@ const RevealCard = ({card, onDismiss}) => {
                     backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
                     rotateY: '180deg'
                 }}>
-                        <img src={card.image ? card.image : `/pics/${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth: 'none' }}/>
+                        <img src={card.image ? card.image : `pics://${card.name}.png`} alt={card.name} style={{ width: '100%', height: '100%', borderRadius: '10px', maxWidth: 'none' }}/>
                 </motion.div>
             </motion.div>
         </motion.div>
@@ -79,9 +79,11 @@ const variants = {
   },
 };
 
+function formatName(name) {
+    return name.replace(/_/g, ' ').replace(/&/g, '&');
+}
 
-
-export default function OpenPack({collection, updateCollection, totalCards, customCards}) {
+export default function OpenPack({collection, updateCollection, customCards}) {
     const navigate = useNavigate();
 
     const [step, setStep] = useState("chooseSet");
@@ -143,7 +145,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
 				<div>
                     <div style={{ textAlign: 'left' }}>
                         <button onClick={() => navigate('/')}>
-                            <img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px", marginTop: "5px"}}/>
+                            <img src="pics://home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px", marginTop: "5px"}}/>
                         </button>
                     </div>
                    <h2 style={{color: "#bf4068", fontSize: "20px", margin: "5px"}}>choose a set ✩‧₊˚</h2>
@@ -175,7 +177,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                                     transition={{ duration: 1 }}
                                     onClick={item === visibleItems[1] ? () => handleSetClick(item.id) : null}      
                                 >    
-                                    <img src={`/pics/${item.name}set.png`} alt={item.name}/>
+                                    <img src={`pics://${item.name}set.png`} alt={item.name}/>
                                     {item.name}
                                 </motion.div>
                                 );
@@ -188,42 +190,35 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                         whileTap={{ scale: 0.8 }}
                         onClick={() => handleClick(-1)}
                         >
-                        <img src="/pics/left.png" alt="left" style={{ boxShadow: 'none', maxHeight: "40px"}}/>
+                        <img src="pics://left.png" alt="left" style={{ boxShadow: 'none', maxHeight: "40px"}}/>
                         </motion.button>
                         <motion.button whileTap={{ scale: 0.8 }} onClick={() => handleClick(1)}>    
-                        <img src="/pics/right.png" alt="right" style={{ boxShadow: 'none', maxHeight: "40px"}}/>
+                        <img src="pics://right.png" alt="right" style={{ boxShadow: 'none', maxHeight: "40px"}}/>
                         </motion.button>
                     </div>
                 </div>
         )}
-
-    {step === "choosePack" && (
-			<div>
-				<div className='packs'>
-					{step === "choosePack" && (
-                        <ChoosePack 
-                            set={set} 
-                            onOpen={() => {
-                                setStep("revealCards");
-                                const selected = [];
-                                for (let i = 0; i < 5; i++){
-                                    selected.push(getCardWRarity(set));
-                                }
-                                setPackCards(selected);
-                                const newCollection = {...collection};
-                                const setKey = `set${set}_names`;
-                                selected.forEach(card => {
-                                    newCollection[setKey] = {...newCollection[setKey]};
-                                    newCollection[setKey][card.name] = (newCollection[setKey][card.name] || 0) + 1;
-                                });
-                                updateCollection(newCollection, 5);
-                                setCurrentCard(0);
-                            }}
-                        />
-                    )}
-				</div>
-			</div>
-      )}
+        {step === "choosePack" && (
+            <ChoosePack 
+                set={set} 
+                onOpen={() => {
+                    setStep("revealCards");
+                    const selected = [];
+                    for (let i = 0; i < 5; i++){
+                        selected.push(getCardWRarity(set));
+                    }
+                    setPackCards(selected);
+                    const newCollection = {...collection};
+                    const setKey = `set${set}_names`;
+                    selected.forEach(card => {
+                        newCollection[setKey] = {...newCollection[setKey]};
+                        newCollection[setKey][card.name] = (newCollection[setKey][card.name] || 0) + 1;
+                    });
+                    updateCollection(newCollection, 5);
+                    setCurrentCard(0);
+                }}
+            />
+        )}
 	
     {step === "revealCards" && (
         currentCard < packCards.length ? (
@@ -233,7 +228,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                         onClick={() => setCurrentCard(packCards.length)}
                         style={{ position: 'absolute', top: '15px', right: '10px' }}
                     >
-                        <img src="/pics/skip.png" alt="skip" style={{ boxShadow: 'none', maxHeight: '30px' }}/>
+                        <img src="pics://skip.png" alt="skip" style={{ boxShadow: 'none', maxHeight: '30px' }}/>
                     </button>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px'}}>
@@ -251,8 +246,8 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
             <div style={{width:'100%', height:'400px'}}>
                     <CircularGallery
                     items={packCards.map(card => ({
-                        image: card.image ? card.image : `/pics/${card.name}.png`,
-                        text: card.name
+                        image: card.image ? card.image : `pics/${card.name}.png`,
+                        text: formatName(card.name)
                     }))}
                     bend={1}
                     textColor="#00bfff"
@@ -263,7 +258,7 @@ export default function OpenPack({collection, updateCollection, totalCards, cust
                     fontUrl="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
                     />
              <button onClick={() => navigate('/')}>                    
-                <img src="/pics/next.png" alt="next" style={{ boxShadow: 'none', maxHeight: "50px"}}/>
+                <img src="pics://next.png" alt="next" style={{ boxShadow: 'none', maxHeight: "50px"}}/>
             </button>
             </div>
     )

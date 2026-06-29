@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import OpenPack from './openpack.js'
 import Collection from './collection.js';
 import CustomCard from "./custom.js";
@@ -58,21 +58,21 @@ function App() {
        <Routes>
         <Route path="/" element={
           <div className="page">
-            <img src="/pics/logo.png"  alt="logo" style={{ boxShadow: 'none', margin: "0 auto", maxHeight: "100px", padding: "5px"}}/>
+            <img src="pics://logo.png"  alt="logo" style={{ boxShadow: 'none', margin: "0 auto", maxHeight: "100px", padding: "5px"}}/>
             <div className="section">
                 <Link to="/openpack">
-                <img src="/pics/back.png" alt="packimg"/>
+                <img src="pics://back.png" alt="packimg"/>
                 </Link>
             </div>
             <div className="navbar">
-              <button> <Link to="/collection"> <img src="/pics/collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
-              <button> <Link to="/custom"><img src="/pics/custom.png" alt="custom" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
-              <button> <Link to="/achievement"><img src="/pics/achievement.png" alt="achievement" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link></button>
+              <button> <Link to="/collection"> <img src="pics://collection.png" alt="collection" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
+              <button> <Link to="/custom"><img src="pics://custom.png" alt="custom" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link> </button>
+              <button> <Link to="/achievement"><img src="pics://achievement.png" alt="achievement" style={{ boxShadow: 'none', maxHeight: "40px"}}/></Link></button>
             </div>
           </div> 
           } 
         />
-        <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} totalCards={totalCards} customCards={customCards}/>}/>
+        <Route path="/openpack" element={<OpenPack collection={collection} updateCollection={updateCollection} customCards={customCards}/>}/>
         <Route path="/collection" element={<Collection collection={collection} customCards={customCards}/>}/>
         <Route path="/custom" element={<CustomCard onSaveCard={onSaveCard}/>} />
         <Route path="/achievement" element={<Achievement achievements={achievements} customCards={customCards}/>}/>

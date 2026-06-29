@@ -3,16 +3,16 @@ import { packs } from './data/packs.js';
 import "./styles/Achievement.css"
 
 const achievementData = [
-    {id: "10cards", name: "collector", description:"collect 10 cards! duplicates included"},  // 1
-    {id: "50cards", name: "obsessed", description:"collect 50 cards! duplicates included"}, // 2
-    {id: "100cards", name: "master clicker", description:"collect 100 cards! duplicates included"}, // 3
-    {id: "all_legendaries", name: "mega lucky", description:"collect all legendary cards from all sets"}, // 4
-    {id: "favorite_card", name: "special buddy", description:"collect vanessa's favorite card..."}, // 5
-    {id: "completeset", name: "catch 'em all", description:"collect ALL cards from all sets"},  // 6
-    {id: "complete1", name: "electified", description:"collect all cards from electric set"},  // 7
-    {id: "complete2", name: "drowning in cuteness", description:"collect all cards from water set"},  // 8
-    {id: "complete3", name:"social butterfly", description:"collect all cards from trainer set"},  // 9
-    {id: "firstcustom", name: "gifted artist", description:"make your first custom card design"}, // 10
+    {id: "10cards", name: "collector", description:"collect 10 cards! duplicates included"}, 
+    {id: "50cards", name: "obsessed", description:"collect 50 cards! duplicates included"},
+    {id: "100cards", name: "master clicker", description:"collect 100 cards! duplicates included"}, 
+    {id: "all_legendaries", name: "mega lucky", description:"collect all legendary cards from all sets"}, 
+    {id: "favorite_card", name: "special buddy", description:"collect vanessa's favorite card..."},
+    {id: "completeset", name: "catch 'em all", description:"collect ALL cards from all sets"}, 
+    {id: "complete1", name: "electified", description:"collect all cards from electric set"}, 
+    {id: "complete2", name: "drowning in cuteness", description:"collect all cards from water set"}, 
+    {id: "complete3", name:"social butterfly", description:"collect all cards from trainer set"}, 
+    {id: "firstcustom", name: "gifted artist", description:"make your first custom card design"}, 
 ]
 
 //return a list
@@ -47,13 +47,13 @@ export default function Achievement ({achievements}) {
 
     return (
         <div className="badge-page">
-            <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
+            <button onClick={() => navigate('/')}><img src="pics://home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
             <h3 style={{fontSize: '20px', color:'#bf4068', margin: '5px'}}>badges ☆</h3>
             <div className="badge-grid">
                 {achievementData.map((achievement) => (
                     <div className="badge" key={achievement.id}>
                         <img 
-                            src={`/pics/${achievement.id}.png`} 
+                            src={`pics://${achievement.id}.png`} 
                             alt={achievement.id} 
                             style={{ filter: achievements?.[achievement.id] ? 'none' : 'grayscale(100%)' }}
                         />

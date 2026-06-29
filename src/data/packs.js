@@ -1,5 +1,5 @@
 export const packs ={
-        1: [ //100% electric achievement
+        1: [ 
             {name:"pikachu", rarity:"common"}, 
             {name:"pichu", rarity:"common"}, 
             {name:"togedemaru", rarity:"common"},
@@ -10,14 +10,14 @@ export const packs ={
             {name:"raichu", rarity:"uncommon"}, 
             {name:"mareep", rarity:"rare"},
             {name:"shinx", rarity:"rare"}, 
-            {name:"pachirisu", rarity:"rare"},  //fav pokemon achievement
+            {name:"pachirisu", rarity:"rare"},
             {name:"emolga", rarity:"rare"},           
             {name:"flaaffy", rarity:"ultra"},
             {name:"ampharos", rarity:"ultra"},                
             {name:"minun", rarity:"ultra"}, 
-            {name:"luxray", rarity:"ultra"}, // evol achievement
+            {name:"luxray", rarity:"ultra"}, 
             {name:"dedenne", rarity:"ultra"},  
-            {name:"zekrom", rarity:"legendary"} //achievement
+            {name:"zekrom", rarity:"legendary"} 
         ],
         2: [
             {name:"squirtle", rarity:"common"}, 
@@ -34,12 +34,12 @@ export const packs ={
             {name:"elesa", rarity:"rare"}, 
             {name:"lillie", rarity:"ultra"}, 
             {name:"erika", rarity:"uncommon"}, 
-            {name:"n", rarity:"legendary"}, //achievement
+            {name:"n", rarity:"legendary"},
             {name:"bianca", rarity:"common"}, 
-            {name:"pokecenter lady", rarity:"common"}, 
-            {name:"hex maniac", rarity:"common"}, 
+            {name:"pokecenter_lady", rarity:"common"}, 
+            {name:"hex_maniac", rarity:"common"}, 
             {name:"shauna", rarity:"uncommon"}, 
-            {name:"mallow & lana", rarity:"rare"}, //achievement
+            {name:"mallow_&_lana", rarity:"rare"},
             {name:"acerola", rarity:"rare"}, 
             {name:"marnie", rarity:"uncommon"}, 
             {name:"irida", rarity:"uncommon"}, 

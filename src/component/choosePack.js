@@ -3,10 +3,10 @@ import { confetti } from "@tsparticles/confetti";
 import React, { useState } from 'react';
 
 const setImages = {
-    1: "/pics/electricset.png",
-    2: "/pics/waterset.png",
-    3: "/pics/trainerset.png",
-    4: "/pics/customset.png"
+    1: "pics://electricset.png",
+    2: "pics://waterset.png",
+    3: "pics://trainerset.png",
+    4: "pics://customset.png"
 };
 
 
@@ -18,14 +18,13 @@ export const ChoosePack = ({ set, onOpen }) => {
     const messages = ["[tap to open]", "keep going...(๑ > ᴗ < ๑)", "one more!₍₍⚞(˶>ᗜ<˶)⚟⁾⁾⁭ ⁭"];
 
     function handleClick() {
-        if (opening) return; // ignore clicks during opening animation
+        if (opening) return; 
 
         if (clicks < 2) {
             // bounce animation
             setBouncing(true);
             setTimeout(() => setBouncing(false), 400);
 
-            // particle burst
             confetti({
                 particleCount: 30,
                 spread: 60,
@@ -35,7 +34,6 @@ export const ChoosePack = ({ set, onOpen }) => {
 
             setClicks(clicks + 1);
         } else {
-            // third click — opening animation then transition
             setOpening(true);
             confetti({
                 particleCount: 100,
@@ -43,7 +41,7 @@ export const ChoosePack = ({ set, onOpen }) => {
                 origin: { x: 0.5, y: 0.5 },
                 colors: ['#f8e2e6', '#ffd6e0', '#ffe897', '#c4949c'],
             });
-            setTimeout(() => onOpen(), 800); // wait for animation then open
+            setTimeout(() => onOpen(), 800); 
         }
     }
 

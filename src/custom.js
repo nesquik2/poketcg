@@ -20,9 +20,9 @@ export default function CustomCard({ onSaveCard }){
     const [brushSize, setBrushSize] = useState(4);
 
     const brushSizes = [
-        { size: 2, img: "/pics/smallbrush.png" },
-        { size: 6, img: "/pics/medbrush.png" },
-        { size: 12, img: "/pics/bigbrush.png" },
+        { size: 2, img: "pics://smallbrush.png" },
+        { size: 6, img: "pics://medbrush.png" },
+        { size: 12, img: "pics://bigbrush.png" },
     ];
 
     const [eraser, setEraser] = useState(false);
@@ -114,7 +114,7 @@ export default function CustomCard({ onSaveCard }){
 
     return (
        <div className="custom-card-page">
-        <button onClick={() => navigate('/')}><img src="/pics/home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
+        <button onClick={() => navigate('/')}><img src="pics://home.png" alt="home" style={{ boxShadow: 'none', maxHeight: "40px"}}/></button>
         <h3 style={{color:'#bf4068', margin: '10px'}}>draw your own card ⋆˚࿔</h3>
 
         <input
@@ -142,14 +142,14 @@ export default function CustomCard({ onSaveCard }){
                 </div>
 
                 <button onClick={() => setEraser(true)}>
-                    <img src="/pics/eraser.png" alt="eraser"
+                    <img src="pics://eraser.png" alt="eraser"
                         style={{ boxShadow: 'none', maxHeight: "35px",
                             opacity: eraser ? 1 : 0.4
                         }}/>
                 </button>
 
                 <button onClick={clearCanvas}>
-                    <img src="/pics/clear.png" alt="clear"
+                    <img src="pics://clear.png" alt="clear"
                         style={{ boxShadow: 'none', maxHeight: "40px",
                             opacity: clearing ? 0.3 : 1,
                             transition: 'opacity 0.3s'
@@ -195,7 +195,7 @@ export default function CustomCard({ onSaveCard }){
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button onClick={saveCard}>
-                <img src="/pics/save.png" alt="save" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
+                <img src="pics://save.png" alt="save" style={{ boxShadow: 'none', maxHeight: "30px"}}/>
             </button>
         </div>
     </div>

@@ -25,8 +25,6 @@ function autoBind(instance) {
 }
 
 const DEFAULT_FONT = 'bold 30px Nunito Sans';
-// Figtree is not guaranteed to be available on the host page, so the component
-// loads it on demand whenever the default font is used.
 const DEFAULT_FONT_URL = 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap';
 
 function deriveFontFamilyFromUrl(url) {
@@ -95,7 +93,6 @@ async function resolveFont(font, fontUrl) {
         await document.fonts.load(font);
         await document.fonts.ready;
       } catch {
-        // Ignore – fall back to whatever the browser provides.
       }
     }
     return font;
@@ -106,13 +103,10 @@ async function resolveFont(font, fontUrl) {
     const prefix = sizeMatch ? sizeMatch[1].trim() : 'bold 30px';
     const resolved = `${prefix} "${family}"`;
 
-        console.log('resolved font:', resolved);
-
     if (document.fonts && document.fonts.load) {
       try {
         await document.fonts.load(resolved);
       } catch {
-        // Ignore – we still attempt to render with the requested font.
       }
     }
     return resolved;
